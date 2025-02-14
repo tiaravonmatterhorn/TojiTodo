@@ -7,18 +7,18 @@ const SegmentedControl = ({ options, onChange }) => {
         <div className="flex bg-indigo-500 p-1 rounded-lg">
             {options.map((option) => (
                 <button
-                    key={option}
+                    key={option.value}
                     className={`flex-1 px-4 py-2 text-center rounded-lg text-white ${
-                        selected === option
+                        selected === option.value
                             ? "bg-indigo-800 shadow font-bold"
                             : "text-gray-500"
                     }`}
                     onClick={() => {
-                        setSelected(option);
-                        onChange(option);
+                        setSelected(option.value);
+                        onChange(option.value);
                     }}
                 >
-                    {option}
+                    {option.label}
                 </button>
             ))}
         </div>
