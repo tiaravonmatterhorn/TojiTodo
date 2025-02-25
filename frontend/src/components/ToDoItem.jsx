@@ -42,6 +42,7 @@ const ToDoItem = ({ todo, triggerConfetti }) => {
         triggerConfetti();
     };
 
+    // handling swipe to right, delete to do
     const leadingActions = () => (
         <LeadingActions>
             <SwipeAction onClick={() => deleteToDoById(todo.id)}>
@@ -52,6 +53,7 @@ const ToDoItem = ({ todo, triggerConfetti }) => {
         </LeadingActions>
     );
 
+    // handling swipe to left, complete to do
     const trailingActions = () => (
         <TrailingActions>
             <SwipeAction
@@ -67,6 +69,11 @@ const ToDoItem = ({ todo, triggerConfetti }) => {
         </TrailingActions>
     );
 
+    // capitalizing first letter for proper display
+    const capitalizeFirstLetter = (string) => {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    };
+
     return (
         <div className="flex flex-col gap-2 bg-indigo-900 text-white px-4 py-2 rounded-md shadow-md shadow-indigo-500/50 mb-4 relative w-full">
             <SwipeableList>
@@ -79,7 +86,7 @@ const ToDoItem = ({ todo, triggerConfetti }) => {
                             {todo.title}
                         </h3>
                         <p className="font-extralight text-sm">
-                            {todo.priority}
+                            {capitalizeFirstLetter(todo.priority)}
                         </p>
                         <p className="font-extralight text-sm">30min</p>
                     </div>

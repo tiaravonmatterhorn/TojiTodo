@@ -9,8 +9,8 @@ class TodoUpdateView(RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        user_id = self.kwargs['user_id']
-        return Todo.objects.filter(user_id=user_id)
+        user = self.request.user
+        return Todo.objects.filter(user = user)
     
     def perform_update(self, serializer):
         serializer.save()

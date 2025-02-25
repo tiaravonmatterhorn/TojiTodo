@@ -27,3 +27,6 @@ class Todo(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_priority_display(self):
+        return self.priority.capitalize()

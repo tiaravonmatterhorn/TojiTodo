@@ -86,13 +86,12 @@ export const deleteToDo = createAsyncThunk(
         const state = getState();
         const { token } = state.auth;
         try {
-            const response = await api.delete(`/user/me/todo/${id}/`, {
+            await api.delete(`/user/me/todo/${id}/`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            console.log("response", response.data);
-            return response.data;
+            return id;
         } catch (error) {
             return rejectWithValue(error.response?.data);
         }
@@ -110,11 +109,11 @@ const userSlice = createSlice({
         toDoError: null,
     },
     reducers: {
-        removeTodo: (state, action) => {
-            state.toDos = state.toDos.filter(
-                (todo) => todo.id !== action.payload
-            );
-        },
+        // removeTodo: (state, action) => {
+        //     state.toDos = state.toDos.filter(
+        //         (todo) => todo.id !== action.payload
+        //     );
+        // },
     },
     extraReducers: (builder) => {
         builder
@@ -173,6 +172,13 @@ const userSlice = createSlice({
                 if (state.toDo && state.toDo.id === action.payload.id) {
                     state.toDo = action.payload;
                 }
+            })
+
+            // Deleting to do
+            .addCase(deleteToDo.fulfilled, (state, action) => {
+                state.toDos = state.toDos.filter(
+                    (todo) => todo.id !== action.payload
+                );
             });
     },
 });
