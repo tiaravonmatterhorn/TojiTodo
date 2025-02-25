@@ -1,6 +1,7 @@
 from ast import Is
+from urllib import request
 from django.shortcuts import render
-from rest_framework.generics import ListAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import ListAPIView, ListCreateAPIView
 from todo.models import Todo
 from todo.serializers import TodoSerializer
 from .serializers import UserSerializer
@@ -26,8 +27,9 @@ class TodosByUserView(ListCreateAPIView):
 
     # return all todos by user
     def get_queryset(self):
-        user_id = self.kwargs['user_id']
-        queryset = Todo.objects.filter(user_id=user_id)
+        # user_id = self.kwargs['user_id']
+        user = self.request.user
+        queryset = Todo.objects.filter(user = user)
 
         search_term = self.request.query_params.get('search', None) # get search term from query params
         if search_term:
@@ -37,8 +39,10 @@ class TodosByUserView(ListCreateAPIView):
     
     # create a todo for a user and associates it with the user
     def perform_create(self, serializer):
-        user_id = self.kwargs['user_id']
-        serializer.save(user_id=user_id)    
+        # user_id = self.kwargs['user_id']
+        user = self.request.user
+        print(f"Creating Todo for user: {user}")  # Debug statement
+        serializer.save(user = user)    
 
 class CategoriesByUserView(ListCreateAPIView):
     serializer_class = CategorySerializer

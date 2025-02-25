@@ -50,7 +50,7 @@ urlpatterns = [
     
 
     path("backend/api/user/", include("user.urls")),
-    path("backend/api/todo/", include("todo.urls")),
+    path("backend/api/user/", include("todo.urls")),
     path("backend/api/category/", include("category.urls")),
     path("backend/api/tag/", include("tag.urls")), 
 
