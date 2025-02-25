@@ -37,9 +37,9 @@ const LoginPage = () => {
     };
 
     return (
-        <section className="flex flex-col bg-neutral-100 text-white px-4 py-2 rounded-md min-h-screen justify-center">
+        <section className="max-w-2xl mx-auto flex flex-col bg-neutral-100 text-white px-4 py-2 rounded-md min-h-screen justify-center">
             <div className="flex flex-col bg-indigo-900  text-white px-4 py-2 rounded-md justify-center h-[80vh] shadow-xl shadow-indigo-500/50">
-                <h1 className="text-3xl font-light text-center">Login</h1>
+                <h1 className="text-3xl font-light text-center mt-6">Login</h1>
                 <form
                     className="flex flex-col gap-2 py-8 rounded-md"
                     onSubmit={handleSubmit}
