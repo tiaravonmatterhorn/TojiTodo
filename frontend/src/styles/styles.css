@@ -4,5 +4,6 @@
 @tailwind components;
 @tailwind utilities; */
 
-@theme {
+body {
+    @apply bg-neutral-100;
 }

@@ -57,7 +57,7 @@ export default function HomePage() {
     const activeToDos = todos.filter((todo) => !todo.completed);
 
     return (
-        <section className="flex flex-col gap-3 bg-neutral-100 text-white px-4 py-8 rounded-md min-h-screen">
+        <section className="max-w-xl mx-auto flex flex-col gap-3 bg-neutral-100 text-white px-4 py-8 rounded-md min-h-screen">
             {uiProps.showConfetti && (
                 <Confetti width={windowWidth} height={windowHeight} />
             )}
