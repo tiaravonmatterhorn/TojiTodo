@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomePage from "../pages/HomePage.jsx";
 import Layout from "../components/Layout.jsx";
-import LoginPage from "../pages/loginPage.jsx";
+import LoginPage from "../pages/LoginPage.jsx";
 import ProfilePage from "../pages/ProfilePage.jsx";
 
 export default function Router() {
