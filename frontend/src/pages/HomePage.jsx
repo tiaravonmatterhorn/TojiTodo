@@ -19,8 +19,6 @@ export default function HomePage() {
 
     const { data: todos, status: toDosStatus, error: toDosError } = useToDos();
 
-    // console.log("data:", todos);
-
     const handleAddToDoClick = () => {
         setUiProps((prevUiProps) => ({
             ...prevUiProps,

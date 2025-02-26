@@ -88,7 +88,7 @@ const ToDoItem = ({ todo, triggerConfetti }) => {
                         <p className="font-extralight text-sm">
                             {capitalizeFirstLetter(todo.priority)}
                         </p>
-                        <p className="font-extralight text-sm">30min</p>
+                        {/* <p className="font-extralight text-sm">30min</p> */}
                     </div>
                     <PiEyesFill className="text-white text-2xl" />
                 </SwipeableListItem>

@@ -1,7 +1,9 @@
 from ast import Is
 from urllib import request
 from django.shortcuts import render
-from rest_framework.generics import ListAPIView, ListCreateAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from todo.models import Todo
 from todo.serializers import TodoSerializer
 from .serializers import UserSerializer
@@ -12,12 +14,23 @@ from rest_framework.permissions import IsAuthenticated
 
 User = get_user_model()
 
-# user profile 
-class UserProfileView(ListAPIView):
+# user data 
+# class UserProfileView(ListAPIView):
+#     serializer_class = UserSerializer
+#     permission_classes = [IsAuthenticated]
+
+#     queryset = User.objects.all()
+
+# user data 
+class UserProfileView(RetrieveUpdateAPIView):
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
 
-    queryset = User.objects.all()
+    def get_object(self):
+        return self.request.user
+    
+    def perform_update(self, serializer):
+        serializer.save() 
 
 
 # Todos by Users view as App is User-centric
@@ -27,7 +40,6 @@ class TodosByUserView(ListCreateAPIView):
 
     # return all todos by user
     def get_queryset(self):
-        # user_id = self.kwargs['user_id']
         user = self.request.user
         queryset = Todo.objects.filter(user = user)
 
@@ -39,7 +51,6 @@ class TodosByUserView(ListCreateAPIView):
     
     # create a todo for a user and associates it with the user
     def perform_create(self, serializer):
-        # user_id = self.kwargs['user_id']
         user = self.request.user
         print(f"Creating Todo for user: {user}")  # Debug statement
         serializer.save(user = user)    

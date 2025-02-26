@@ -23,7 +23,7 @@ export const fetchUserData = createAsyncThunk(
 const userSlice = createSlice({
     name: "user",
     initialState: {
-        userData: null,
+        userData: {},
         userDataStatus: "idle",
         userDataError: null,
     },
