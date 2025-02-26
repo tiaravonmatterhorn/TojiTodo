@@ -2,6 +2,8 @@ from django.db import models
 from category.models import Category
 from tag.models import Tag
 from django.contrib.auth import get_user_model
+from django.utils.timezone import now
+
 
 User = get_user_model()
 
@@ -30,3 +32,12 @@ class Todo(models.Model):
 
     def get_priority_display(self):
         return self.priority.capitalize()
+    
+    def save(self, *args, **kwargs):
+        if self.completed and not self.completed_at:
+            self.completed_at = now()
+            self.user.last_completed_date = now().date()
+            self.user.update_streak()
+            self.user.save()
+
+        super().save(*args, **kwargs)
